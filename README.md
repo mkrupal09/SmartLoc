@@ -62,11 +62,38 @@ smartLocation!!.startLocationUpdate(SmartLocation.Configuration.Builder().apply 
 ```
 
 ```java
-  private val onLocationUpdate = object : SmartLocation.OnLocationUpdate {
+private val onLocationUpdate = object : SmartLocation.OnLocationUpdate {
         override fun onLocationUpdate(location: Location) {
-            //Here you've latest location
+            // Here you've latest location
         }
     }
 ```
 
 start location update using foreground service (work even after closing app)
+```java
+smartLocation!!.setOnLocationRequestSetting(object : SmartLocation.OnLocationSetting {
+            override fun onLocationSetting(locationSettingRequest: LocationSettingsRequest) {
+                smartLocation!!.askForLocationSettingDialog(locationSettingRequest, this@LocationSampleActivity)
+            }
+        })
+
+smartLocation!!.requestLocationService(SmartLocation.Configuration.Builder().apply {
+            setFastestIntervalSeconds(5)
+            setUpdateIntervalSeconds(15)
+            setNotificationMessage("{App Name} is Fetching location")
+            setNotificationTitle("{App Name}")
+            setNotificationIcon(R.drawable.ic_flash)
+        }.build())
+
+LocalBroadcastManager.getInstance(this@LocationSampleActivity).registerReceiver(onLocationBroadcast,IntentFilter(SmartLocationService.ACTION_BROADCAST))        
+```
+
+ ```java
+ private val onLocationBroadcast = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            val location = intent!!.getParcelableExtra<Location>(SmartLocationService.EXTRA_LOCATION)
+            // Here you've latest location
+        }
+}
+```
+    
