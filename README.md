@@ -33,7 +33,7 @@ smartLocation = SmartLocation.getInstance(this)
 ```java
 smartLocation!!.requestLocationPermission(this, object : SmartLocation.OnLocationPermission {
                     override fun onGranted() {
-                        // here you've location permission do your location stuff here
+                        // here you've location permission and can request location updates using below method
                     }
                 })
 ```
@@ -45,7 +45,7 @@ override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<Str
         smartLocation?.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 ```
-**start location updates using (work untill activity opened)**
+**(Method 1) Start location updates using (work untill activity opened)**
 ```java
 smartLocation!!.bindToLifeCycle(this@..Activity) // For bind location to activity
 smartLocation!!.getLastKnownLocation(onLocationUpdate) // For fetching last known location (optional)
@@ -69,7 +69,7 @@ private val onLocationUpdate = object : SmartLocation.OnLocationUpdate {
     }
 ```
 
-**start location update using foreground service (work even after closing app)**
+**(Method 2) start location update using foreground service (work even after closing app)**
 
 ```java
 smartLocation!!.setOnLocationRequestSetting(object : SmartLocation.OnLocationSetting {
