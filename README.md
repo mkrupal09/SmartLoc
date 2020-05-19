@@ -29,7 +29,7 @@ Create instance using context
 smartLocation = SmartLocation.getInstance(this) 
 ```
 
-Ask location permission
+**Ask location permission**
 ```java
 smartLocation!!.requestLocationPermission(this, object : SmartLocation.OnLocationPermission {
                     override fun onGranted() {
@@ -45,7 +45,7 @@ override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<Str
         smartLocation?.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 ```
-start location updates using (work untill activity opened)
+**start location updates using (work untill activity opened)**
 ```java
 smartLocation!!.bindToLifeCycle(this@..Activity) // For bind location to activity
 smartLocation!!.getLastKnownLocation(onLocationUpdate) // For fetching last known location (optional)
@@ -69,7 +69,8 @@ private val onLocationUpdate = object : SmartLocation.OnLocationUpdate {
     }
 ```
 
-start location update using foreground service (work even after closing app)
+**start location update using foreground service (work even after closing app)**
+
 ```java
 smartLocation!!.setOnLocationRequestSetting(object : SmartLocation.OnLocationSetting {
             override fun onLocationSetting(locationSettingRequest: LocationSettingsRequest) {
