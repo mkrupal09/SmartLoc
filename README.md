@@ -23,7 +23,7 @@ implementation 'com.hb.smartlocation:smartlocation:1.0'
 
 # How it works?
 
-Create instance using context
+**Create instance using context**
 
 ```java
 smartLocation = SmartLocation.getInstance(this) 
@@ -38,7 +38,7 @@ smartLocation!!.requestLocationPermission(this, object : SmartLocation.OnLocatio
                 })
 ```
 
-override activity/fragment permission result and provide result
+**override activity/fragment permission result and provide result**
 ```java
 override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
